@@ -35,3 +35,9 @@ while [[ ! $GUESS =~ ^[0-9]+$ ]] || (( GUESS != SECRET_NUMBER )); do
 
   read GUESS
 done
+
+NUMBER_OF_GUESSES=$((NUMBER_OF_GUESSES + 1))
+
+INSERT_GAME=$($PSQL "INSERT INTO games(user_id, number_of_guesses) VALUES($USER_ID, $NUMBER_OF_GUESSES)")
+
+echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
